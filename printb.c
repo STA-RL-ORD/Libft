@@ -1,45 +1,45 @@
 /*░░██████ ▓█████▄  ██████▒		creator : Théau NICOLAS							
-░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 28/10/2017 15:25:21
-░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : ft_putnbr.c		
+░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 05/11/2017 14:55:54
+░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : printb.c					
 ░░  ▒   ██▒░▓█▄   ▌░▓█▒  ░ 														
 ░░▒██████▒▒░██████░ ██░    		----------------------------------------------	
 ░░▒ ▒▓▒ ▒ ░ ▒▒▓  ▒  ▒░░    		comments :										
 ░░░ ░▒  ░ ░ ░ ▒  ▒  ░░░     													
 ░░░  ░  ░   ░ ░  ░  ░ ░    														
 ░░      ░     ░            														
-░░░ 																			*/
+░░░ 							----------------------------------------------*/
 
 #include <unistd.h>
+#include <stdio.h>
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_putstr(char* str)
 {
-	unsigned int conv;
-  	if (nb < 0)
+	while(str)
+		write(1, str++, 1);
+}
+
+void	printb(int a, int nb_bits)
+{
+	int	msk;
+
+	msk = 1 << (nb_bits - 1);
+	while (msk > 0)
 	{
-		ft_putchar('-');
-		nb = -nb;
-		conv = -nb;
-	}
-	conv = nb;
-	if (conv >= 10)
-	{
-		ft_putnbr(conv / 10);
-		ft_putnbr(conv % 10);
-	}
-	else
-	{
-		ft_putchar(conv + '0');
+		if (a & msk)
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+		msk >>= 1;
 	}
 }
 
-
-int 	main()
+int main()
 {
-	ft_putnbr(-2147483648);
+	printb(10, 16);
 	return 0;
 }

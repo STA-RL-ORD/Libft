@@ -1,24 +1,26 @@
 /*░░██████ ▓█████▄  ██████▒		creator : Théau NICOLAS							
-░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 28/10/2017 15:25:21
-░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : ft_putnbr.c		
+░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 05/11/2017 15:35:25
+░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : ft_printbase.c
 ░░  ▒   ██▒░▓█▄   ▌░▓█▒  ░ 														
 ░░▒██████▒▒░██████░ ██░    		----------------------------------------------	
 ░░▒ ▒▓▒ ▒ ░ ▒▒▓  ▒  ▒░░    		comments :										
 ░░░ ░▒  ░ ░ ░ ▒  ▒  ░░░     													
 ░░░  ░  ░   ░ ░  ░  ░ ░    														
 ░░      ░     ░            														
-░░░ 																			*/
+░░░ 							----------------------------------------------*/
 
 #include <unistd.h>
+#include <stdio.h>
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+int		ft_printbase(int nb, int base)
 {
 	unsigned int conv;
+
   	if (nb < 0)
 	{
 		ft_putchar('-');
@@ -26,20 +28,19 @@ void	ft_putnbr(int nb)
 		conv = -nb;
 	}
 	conv = nb;
-	if (conv >= 10)
+	if (conv > 0)
 	{
-		ft_putnbr(conv / 10);
-		ft_putnbr(conv % 10);
+		ft_printbase(conv / base, base);
+		ft_printbase(conv % base, base);
 	}
 	else
-	{
-		ft_putchar(conv + '0');
-	}
+		ft_putchar(conv + 48);
 }
-
 
 int 	main()
 {
-	ft_putnbr(-2147483648);
+
+	printf("%d\n", ft_printbase(10, 5));
+
 	return 0;
 }

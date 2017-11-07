@@ -1,6 +1,6 @@
 /*░░██████ ▓█████▄  ██████▒		creator : Théau NICOLAS							
-░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 28/10/2017 15:25:21
-░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : ft_putnbr.c		
+░░▒██    ▒ ▒██▀  █▌▓██   ▒ 		date : 04/11/2017 22:45:26
+░░░ ▓██▄   ░██    ▌▒████ ░ 		name of program : ft_printbit.c
 ░░  ▒   ██▒░▓█▄   ▌░▓█▒  ░ 														
 ░░▒██████▒▒░██████░ ██░    		----------------------------------------------	
 ░░▒ ▒▓▒ ▒ ░ ▒▒▓  ▒  ▒░░    		comments :										
@@ -16,30 +16,23 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_printbit(unsigned char octet)
 {
-	unsigned int conv;
-  	if (nb < 0)
+	unsigned char	msk;
+
+	msk = 1 << 7; 			//msk est un masque
+	while (msk > 0)
 	{
-		ft_putchar('-');
-		nb = -nb;
-		conv = -nb;
-	}
-	conv = nb;
-	if (conv >= 10)
-	{
-		ft_putnbr(conv / 10);
-		ft_putnbr(conv % 10);
-	}
-	else
-	{
-		ft_putchar(conv + '0');
+		if (octet & msk)	//ici c'est un & entre l'octet de base et le masque si le resultat bit a bit est 1 on affiche 1
+			ft_putchar('1');
+		else
+			ft_putchar('0');
+		msk >>= 1;
 	}
 }
 
-
-int 	main()
+int main()
 {
-	ft_putnbr(-2147483648);
+	ft_printbit(5);
 	return 0;
 }
